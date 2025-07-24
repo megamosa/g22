@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magoarab_easyorder>
+            <general>
+                <enabled>1</enabled>
+                <form_title>Quick Order Form</form_title>
+                <success_message>Your order has been created successfully! We will contact you soon.</success_message>
+                <send_email_notification>1</send_email_notification>
+                <default_customer_group>0</default_customer_group>
+                <form_position>after_review</form_position>
+                <auto_generate_email>1</auto_generate_email>
+                <email_domain>easypay.com</email_domain>
+                <phone_validation>1</phone_validation>
+            </general>
+            <form_fields>
+                <require_email>0</require_email>
+                <require_postcode>0</require_postcode>
+                <postcode_field_type>optional</postcode_field_type>
+                <require_region>0</require_region>
+                <show_street_2>1</show_street_2>
+                <require_city>1</require_city>
+                <country_field_type>visible</country_field_type>
+                <default_country>EG</default_country>
+                <region_field_type>visible</region_field_type>
+            </form_fields>
+            <shipping>
+                <default_shipping_price>0</default_shipping_price>  <!-- تغيير من 80 إلى 0 -->
+                <free_shipping_threshold>1000</free_shipping_threshold>
+            </shipping>
+            <shipping_payment>
+                <fallback_shipping_price>0</fallback_shipping_price>  <!-- تغيير من 80 إلى 0 -->
+            </shipping_payment>
+            <postcode_generation>
+                <auto_generate_postcode>0</auto_generate_postcode>
+                <postcode_generation_method>last_5_digits</postcode_generation_method>
+            </postcode_generation>
+            <advanced>
+                <debug_mode>0</debug_mode>
+                <api_timeout>15</api_timeout>
+                <css_scope_validation>1</css_scope_validation>
+            </advanced>
+        </magoarab_easyorder>
+    </default>
+</config>

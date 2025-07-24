@@ -1,0 +1,321 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MagoArab_EasYorder Professional Admin Configuration
+ *
+ * @category    MagoArab
+ * @package     MagoArab_EasYorder
+ * @author      MagoArab Development Team
+ * @copyright   Copyright (c) 2025 MagoArab
+ * @license     https://opensource.org/licenses/MIT MIT License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magoarab" translate="label" sortOrder="300">
+            <label>MagoArab</label>
+        </tab>
+        
+        <section id="magoarab_easyorder" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>EasyOrder - Quick Checkout</label>
+            <tab>magoarab</tab>
+            <resource>MagoArab_EasYorder::config</resource>
+            
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <comment>Control the main functionality of the EasyOrder quick checkout extension.</comment>
+                
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable EasyOrder</label>
+                    <comment>Enable or disable the quick checkout form on product pages. When disabled, the form will not appear anywhere on the frontend.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                
+                <field id="form_title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Form Title</label>
+                    <comment>The title displayed at the top of the quick checkout form.</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="success_message" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Success Message</label>
+                    <comment>Message displayed to customers after successful order placement.</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="send_email_notification" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Send Email Notification</label>
+                    <comment>Send order confirmation email to customers who place orders through EasyOrder.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="default_customer_group" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Customer Group</label>
+                    <comment>Customer group assigned to guest orders placed through EasyOrder.</comment>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="form_position" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Form Position</label>
+                    <comment>Where to display the quick checkout form on product pages.</comment>
+                    <source_model>MagoArab\EasYorder\Model\Config\Source\FormPosition</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="auto_generate_email" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Auto Generate Email from Phone</label>
+                    <comment>Automatically generate email address from phone number if customer does not provide one.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="email_domain" translate="label comment" type="text" sortOrder="75" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Email Domain for Auto-Generated Emails</label>
+                    <comment>Domain to use when auto-generating email addresses (e.g., easypay.com). Generated emails will be: phone@domain.com</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="auto_generate_email">1</field>
+                    </depends>
+                </field>
+                
+                <field id="phone_validation" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Phone Validation</label>
+                    <comment>Enable phone number format validation on the frontend.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            
+            <group id="form_fields" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Form Fields Control</label>
+                <comment>Configure which fields are required or optional in the quick checkout form.</comment>
+                
+                <field id="require_email" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Require Email Field</label>
+                    <comment>Make email field required for all customers.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="require_postcode" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Require Postcode Field</label>
+                    <comment>Make postcode field required for all countries (overrides country-specific settings).</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="postcode_field_type" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+    <label>Postcode Field Type</label>
+    <comment>Control how postcode field is displayed</comment>
+    <source_model>MagoArab\EasYorder\Model\Config\Source\PostcodeFieldType</source_model>
+    <depends>
+        <field id="*/general/enabled">1</field>
+    </depends>
+</field>
+                <field id="require_region" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Require Region Field</label>
+                    <comment>Make region/state field required for all countries.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="show_street_2" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Second Street Line</label>
+                    <comment>Display second street address line field for additional address information.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="require_city" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Require City Field</label>
+                    <comment>Make city field required for all customers.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <!-- تم حذف خيارات Country Field Display و Default Country -->
+
+                <field id="region_field_type" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Region Field Display</label>
+                    <comment>Control how region/state field is displayed</comment>
+                    <source_model>MagoArab\EasYorder\Model\Config\Source\RegionFieldType</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <!-- إضافة مربع CSS مخصص -->
+                <field id="custom_css" translate="label comment" type="textarea" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Custom CSS</label>
+                    <comment>Add custom CSS styles for the EasyOrder form. This CSS will be applied to the quick order form.</comment>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            
+            <group id="shipping_payment" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Shipping and Payment Integration</label>
+                
+                <!-- Shipping Methods Configuration -->
+                <field id="enabled_shipping_methods" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled Shipping Methods</label>
+                    <comment>Select which shipping methods should be available in EasyOrder. Leave empty to show all active methods.</comment>
+                    <source_model>MagoArab\EasYorder\Model\Config\Source\ShippingMethods</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="shipping_method_priority" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Shipping Methods Priority</label>
+                    <comment>Comma-separated list of shipping method codes in order of priority (e.g., flatrate_flatrate,freeshipping_freeshipping)</comment>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <!-- Payment Methods Configuration -->
+                <field id="enabled_payment_methods" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled Payment Methods</label>
+                    <comment>Select which payment methods should be available in EasyOrder. Leave empty to show all active methods.</comment>
+                    <source_model>MagoArab\EasYorder\Model\Config\Source\PaymentMethods</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="payment_method_priority" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Payment Methods Priority</label>
+                    <comment>Comma-separated list of payment method codes in order of priority (e.g., cashondelivery,banktransfer,free)</comment>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="default_payment_method" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Payment Method</label>
+                    <comment>Default payment method to be selected when no payment methods are available.</comment>
+                    <source_model>MagoArab\EasYorder\Model\Config\Source\PaymentMethods</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <!-- تم حذف خيار Fallback Shipping Price -->
+                
+                <field id="integration_info" translate="label" type="note" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Integration Information</label>
+                    <comment><![CDATA[
+                        <strong>How it works:</strong><br/>
+                        • EasyOrder retrieves shipping and payment methods from your Magento configuration<br/>
+                        • Only methods that are active in your store will be available<br/>
+                        • Use the settings above to further filter which methods appear in EasyOrder<br/>
+                        • Priority settings control the order in which methods are displayed
+                    ]]></comment>
+                </field>
+				<field id="default_order_status" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Order Status</label>
+                    <comment>Status assigned to orders created through EasyOrder</comment>
+                    <source_model>MagoArab\EasYorder\Model\Config\Source\OrderStatus</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="default_order_state" translate="label comment" type="select" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Default Order State</label>
+                    <comment>State assigned to orders created through EasyOrder</comment>
+                    <source_model>MagoArab\EasYorder\Model\Config\Source\OrderState</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            
+            <group id="postcode_generation" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Postcode Generation</label>
+                
+                <field id="auto_generate_postcode" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Auto Generate Postcode from Phone</label>
+                    <comment>Automatically generate postcode from phone number for Egyptian addresses.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="postcode_generation_method" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Postcode Generation Method</label>
+                    <comment>Choose how to generate postcode from phone number.</comment>
+                    <source_model>MagoArab\EasYorder\Model\Config\Source\PostcodeGenerationMethod</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                        <field id="auto_generate_postcode">1</field>
+                    </depends>
+                </field>
+            </group>
+            
+            <group id="advanced" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Advanced Settings</label>
+                <comment>Advanced configuration options for developers and store administrators.</comment>
+                
+                <field id="debug_mode" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Debug Mode</label>
+                    <comment>Enable detailed logging for troubleshooting shipping and payment method issues.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="api_timeout" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>API Timeout (seconds)</label>
+                    <comment>Timeout for shipping and payment method API calls. Increase if you experience timeout issues.</comment>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+                <field id="css_scope_validation" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>CSS Scope Validation</label>
+                    <comment>Validate that all CSS is properly scoped to prevent theme conflicts. Disable only if you experience styling issues.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

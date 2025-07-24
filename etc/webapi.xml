@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MagoArab_EasYorder Web API Configuration
+ *
+ * @category    MagoArab
+ * @package     MagoArab_EasYorder
+ * @author      MagoArab Development Team
+ * @copyright   Copyright (c) 2025 MagoArab
+ * @license     https://opensource.org/licenses/MIT MIT License
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    
+    <!-- Get shipping methods -->
+    <route url="/V1/easyorder/shipping-methods" method="POST">
+        <service class="MagoArab\EasYorder\Api\QuickOrderServiceInterface" method="getAvailableShippingMethods"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    
+    <!-- Get payment methods -->
+    <route url="/V1/easyorder/payment-methods" method="GET">
+        <service class="MagoArab\EasYorder\Api\QuickOrderServiceInterface" method="getAvailablePaymentMethods"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    
+    <!-- Create quick order -->
+    <route url="/V1/easyorder/create" method="POST">
+        <service class="MagoArab\EasYorder\Api\QuickOrderServiceInterface" method="createQuickOrder"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    
+</routes>

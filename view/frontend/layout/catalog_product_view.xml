@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MagoArab_EasYorder Product Page Layout
+ *
+ * @category    MagoArab
+ * @package     MagoArab_EasYorder
+ * @author      MagoArab Development Team
+ * @copyright   Copyright (c) 2025 MagoArab
+ * @license     https://opensource.org/licenses/MIT MIT License
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MagoArab_EasYorder::css/easyorder.css"/>
+    </head>
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="MagoArab\EasYorder\Block\Product\QuickOrder"
+                   name="product.info.magoarab.easyorder"
+                   template="MagoArab_EasYorder::product/quick_order.phtml"
+                   after="product.info.review">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">magoarab-easyorder-container</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

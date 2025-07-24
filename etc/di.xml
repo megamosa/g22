@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MagoArab_EasYorder Dependency Injection Configuration
+ *
+ * @category    MagoArab
+ * @package     MagoArab_EasYorder
+ * @author      MagoArab Development Team
+ * @copyright   Copyright (c) 2025 MagoArab
+ * @license     https://opensource.org/licenses/MIT MIT License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    
+    <!-- Service Contracts -->
+    <preference for="MagoArab\EasYorder\Api\QuickOrderServiceInterface" 
+                type="MagoArab\EasYorder\Model\QuickOrderService"/>
+    
+    <preference for="MagoArab\EasYorder\Api\Data\QuickOrderDataInterface" 
+                type="MagoArab\EasYorder\Model\Data\QuickOrderData"/>
+    
+    <!-- QuickOrderService with proper dependencies -->
+    <type name="MagoArab\EasYorder\Model\QuickOrderService">
+        <arguments>
+            <argument name="productRepository" xsi:type="object">Magento\Catalog\Api\ProductRepositoryInterface</argument>
+            <argument name="quoteFactory" xsi:type="object">Magento\Quote\Model\QuoteFactory</argument>
+            <argument name="quoteManagement" xsi:type="object">Magento\Quote\Model\QuoteManagement</argument>
+            <argument name="storeManager" xsi:type="object">Magento\Store\Model\StoreManagerInterface</argument>
+            <argument name="customerFactory" xsi:type="object">Magento\Customer\Model\CustomerFactory</argument>
+            <argument name="customerRepository" xsi:type="object">Magento\Customer\Api\CustomerRepositoryInterface</argument>
+            <argument name="orderSender" xsi:type="object">Magento\Sales\Model\Order\Email\Sender\OrderSender</argument>
+            <argument name="helperData" xsi:type="object">MagoArab\EasYorder\Helper\Data</argument>
+            <argument name="cartRepository" xsi:type="object">Magento\Quote\Api\CartRepositoryInterface</argument>
+            <argument name="cartManagement" xsi:type="object">Magento\Quote\Api\CartManagementInterface</argument>
+            <argument name="scopeConfig" xsi:type="object">Magento\Framework\App\Config\ScopeConfigInterface</argument>
+            <argument name="logger" xsi:type="object">Psr\Log\LoggerInterface</argument>
+            <argument name="shippingMethodManagement" xsi:type="object">Magento\Quote\Api\ShippingMethodManagementInterface</argument>
+            <argument name="paymentMethodList" xsi:type="object">Magento\Payment\Api\PaymentMethodListInterface</argument>
+            <argument name="paymentConfig" xsi:type="object">Magento\Payment\Model\Config</argument>
+            <argument name="shippingConfig" xsi:type="object">Magento\Shipping\Model\Config</argument>
+            <argument name="regionFactory" xsi:type="object">Magento\Directory\Model\RegionFactory</argument>
+            <argument name="orderRepository" xsi:type="object">Magento\Sales\Api\OrderRepositoryInterface</argument>
+            <argument name="priceHelper" xsi:type="object">Magento\Framework\Pricing\Helper\Data</argument>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session</argument>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session</argument>
+            <argument name="ruleFactory" xsi:type="object">Magento\CatalogRule\Model\RuleFactory</argument>
+            <argument name="dateTime" xsi:type="object">Magento\Framework\Stdlib\DateTime\DateTime</argument>
+            <argument name="request" xsi:type="object">Magento\Framework\App\RequestInterface</argument>
+            <argument name="cartRuleFactory" xsi:type="object">Magento\SalesRule\Model\RuleFactory</argument>
+            <argument name="cartRuleValidator" xsi:type="object">Magento\SalesRule\Model\Validator</argument>
+            <argument name="catalogRuleResource" xsi:type="object">Magento\CatalogRule\Model\ResourceModel\Rule</argument>
+        </arguments>
+    </type>
+    
+    <!-- Controller Dependencies -->
+    <type name="MagoArab\EasYorder\Controller\Order\Create">
+        <arguments>
+            <argument name="quickOrderDataFactory" xsi:type="object">MagoArab\EasYorder\Api\Data\QuickOrderDataInterfaceFactory</argument>
+        </arguments>
+    </type>
+    
+    <!-- Block Dependencies -->
+    <type name="MagoArab\EasYorder\Block\Product\QuickOrder">
+        <arguments>
+            <argument name="helperData" xsi:type="object">MagoArab\EasYorder\Helper\Data</argument>
+            <argument name="quickOrderService" xsi:type="object">MagoArab\EasYorder\Api\QuickOrderServiceInterface</argument>
+            <argument name="registry" xsi:type="object">Magento\Framework\Registry</argument>
+            <argument name="storeManager" xsi:type="object">Magento\Store\Model\StoreManagerInterface</argument>
+            <argument name="priceHelper" xsi:type="object">Magento\Framework\Pricing\Helper\Data</argument>
+            <argument name="countrySource" xsi:type="object">Magento\Directory\Model\Config\Source\Country</argument>
+            <argument name="jsonHelper" xsi:type="object">Magento\Framework\Json\Helper\Data</argument>
+            <argument name="formKey" xsi:type="object">Magento\Framework\Data\Form\FormKey</argument>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session</argument>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session</argument>
+            <argument name="ruleFactory" xsi:type="object">Magento\CatalogRule\Model\RuleFactory</argument>
+            <argument name="dateTime" xsi:type="object">Magento\Framework\Stdlib\DateTime\DateTime</argument>
+        </arguments>
+    </type>
+</config>
